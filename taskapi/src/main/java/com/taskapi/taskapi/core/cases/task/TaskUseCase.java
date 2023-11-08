@@ -1,9 +1,6 @@
 package com.taskapi.taskapi.core.cases.task;
-
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import com.taskapi.taskapi.core.domain.entity.StatusTaskToDo;
 import com.taskapi.taskapi.core.domain.entity.TaskToDo;
 
@@ -27,6 +24,8 @@ public interface TaskUseCase {
     //Adicione um campo de status à entidade Task para rastrear o status de uma tarefa
     public ResponseEntity<String> updateStatusTaskToDo(StatusTaskToDo statusTaskToDo, String title);
 
+    //Lista Tarefas Por status 
+    public ResponseEntity<Object> listStatusTaskToDo(String status); 
     
 
     }

@@ -54,12 +54,16 @@ public class TaskToDoService implements TaskUseCase {
         return ResponseEntity.ok().body("tarefa atualizada com Sucesso"); 
     }
     
-
-
     @Override
     public ResponseEntity<String> updateStatusTaskToDo(StatusTaskToDo statusTaskToDo, String title) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateStatusTaskToDo'");
+    }
+
+    @Override
+    public ResponseEntity<Object> listStatusTaskToDo(String status) {
+        List<TaskToDo> taskToDoList = taskRepository.findByStatusTaskToDo(status);
+        return ResponseEntity.ok().body(taskToDoList);
     }
     
   

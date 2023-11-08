@@ -29,9 +29,11 @@ public class TaskToDo{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private  String id;
+    
     @NotBlank
     @Column(unique = true)
     private String title;
+
     @NotBlank
      @Column(unique = true)
     private String description;
