@@ -2,7 +2,8 @@ package com.taskapi.taskapi.infrastructure.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.taskapi.taskapi.core.domain.entity.TaskToDo;
+import com.taskapi.taskapi.core.entity.taskToDo.TaskToDo;
+
 import java.util.List;
 import java.util.Optional;
 

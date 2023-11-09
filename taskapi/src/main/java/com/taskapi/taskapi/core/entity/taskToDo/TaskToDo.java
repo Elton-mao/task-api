@@ -1,4 +1,4 @@
-package com.taskapi.taskapi.core.domain.entity;
+package com.taskapi.taskapi.core.entity.taskToDo;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -20,7 +20,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of="id")
 @ToString
 
 @Entity

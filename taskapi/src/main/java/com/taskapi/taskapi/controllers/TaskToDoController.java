@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.taskapi.taskapi.core.domain.entity.StatusTaskToDo;
-import com.taskapi.taskapi.core.domain.entity.TaskToDo;
+import com.taskapi.taskapi.core.entity.taskToDo.StatusTaskToDo;
+import com.taskapi.taskapi.core.entity.taskToDo.TaskToDo;
 import com.taskapi.taskapi.core.services.TaskToDoService;
 
 import jakarta.validation.Valid;
