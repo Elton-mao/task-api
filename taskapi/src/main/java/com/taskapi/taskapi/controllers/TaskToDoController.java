@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.taskapi.taskapi.core.domain.entity.StatusTaskToDo;
-import com.taskapi.taskapi.core.domain.entity.TaskToDo;
+import com.taskapi.taskapi.core.entity.taskToDo.StatusTaskToDo;
+import com.taskapi.taskapi.core.entity.taskToDo.TaskToDo;
 import com.taskapi.taskapi.core.services.TaskToDoService;
 
 import jakarta.validation.Valid;
@@ -52,5 +52,11 @@ public class TaskToDoController  {
    @PutMapping("/{title}/update")
    public ResponseEntity<Object> updateStatusTaskToDo(@PathVariable String title, @RequestBody StatusTaskToDo statusTaskToDo ){
       return ResponseEntity.ok().body(taskToDoService.updateStatusTaskToDo(statusTaskToDo, title));
+   }
+   
+   //Lista Tarefas Por status
+   @GetMapping("status/{status}")
+   public ResponseEntity<Object> findByStatusTaskToDo(@PathVariable StatusTaskToDo status){
+      return this.taskToDoService.listStatusTaskToDo(status);
    }
 }

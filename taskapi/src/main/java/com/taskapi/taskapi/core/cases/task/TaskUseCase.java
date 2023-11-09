@@ -1,8 +1,9 @@
 package com.taskapi.taskapi.core.cases.task;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
-import com.taskapi.taskapi.core.domain.entity.StatusTaskToDo;
-import com.taskapi.taskapi.core.domain.entity.TaskToDo;
+
+import com.taskapi.taskapi.core.entity.taskToDo.StatusTaskToDo;
+import com.taskapi.taskapi.core.entity.taskToDo.TaskToDo;
 
 public interface TaskUseCase {
 
@@ -25,7 +26,7 @@ public interface TaskUseCase {
     public ResponseEntity<String> updateStatusTaskToDo(StatusTaskToDo statusTaskToDo, String title);
 
     //Lista Tarefas Por status 
-    public ResponseEntity<Object> listStatusTaskToDo(String status); 
+    public ResponseEntity<Object> listStatusTaskToDo(StatusTaskToDo status); 
     
 
     }

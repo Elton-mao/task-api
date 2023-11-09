@@ -1,4 +1,4 @@
-package com.taskapi.taskapi.core.domain.entity;
+package com.taskapi.taskapi.core.entity.taskToDo;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
