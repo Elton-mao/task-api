@@ -4,5 +4,4 @@ public enum StatusTaskToDo {
         PENDING,
         COMPLETED , 
         INPROGRESS;
-
 }

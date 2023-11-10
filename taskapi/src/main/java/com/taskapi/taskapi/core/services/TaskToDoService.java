@@ -1,6 +1,7 @@
 package com.taskapi.taskapi.core.services;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,9 +20,13 @@ public class TaskToDoService implements TaskUseCase {
     private TaskRepository taskRepository; 
 
     @Override
-    public ResponseEntity<String> newtaskToDo(TaskToDo talskToDo) {
-        taskRepository.save(talskToDo);
-        return ResponseEntity.ok("tarefa Criada com Suceso");
+    public ResponseEntity<String> newtaskToDo(TaskToDoDTO data) {
+        TaskToDo newTaskToDo = new TaskToDo();
+        newTaskToDo.setTitle(data.title());
+        newTaskToDo.setDescription(data.description());
+        newTaskToDo.setStatusTaskToDo(data.statusTaskToDo());
+        this.taskRepository.save(newTaskToDo);
+        return ResponseEntity.ok().body("atividade criada com sucesso");
     }
 
     @Override
@@ -65,8 +70,15 @@ public class TaskToDoService implements TaskUseCase {
     @Override
     public ResponseEntity<Object> listStatusTaskToDo(StatusTaskToDo status) {
         List<TaskToDo> taskToDoList = taskRepository.findByStatusTaskToDo(status);
-        return ResponseEntity.ok().body(taskToDoList);
+        List<TaskToDoDTO> taskToDoDTOs = new ArrayList<>(); 
+        for(TaskToDo task : taskToDoList ){
+            TaskToDoDTO taskToDoDTO = new TaskToDoDTO(task.getTitle(),task.getDescription(),
+             task.getCrationDate(), task.getStatusTaskToDo()); 
+            taskToDoDTOs.add(taskToDoDTO);
+        }
+        return ResponseEntity.ok().body(taskToDoDTOs);
     }
+
     
   
 }

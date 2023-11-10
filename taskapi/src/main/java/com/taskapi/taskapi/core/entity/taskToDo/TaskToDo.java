@@ -35,7 +35,6 @@ public class TaskToDo{
     private String title;
 
     @NotBlank
-     @Column(unique = true)
     private String description;
 
     private LocalDateTime crationDate = LocalDateTime.now();

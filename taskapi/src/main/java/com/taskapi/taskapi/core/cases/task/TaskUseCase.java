@@ -4,11 +4,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.taskapi.taskapi.core.entity.taskToDo.StatusTaskToDo;
 import com.taskapi.taskapi.core.entity.taskToDo.TaskToDo;
+import com.taskapi.taskapi.core.entity.taskToDo.TaskToDoDTO;
 
 public interface TaskUseCase {
 
     //Cria uma entidade Task com os campos mencionados.
-    public ResponseEntity<String> newtaskToDo(@RequestBody TaskToDo talskToDo);
+    public ResponseEntity<String> newtaskToDo(@RequestBody TaskToDoDTO data);
 
     //Excluir uma tarefa por ID.
     public ResponseEntity<String> deleteTaskToDoByid(String id);

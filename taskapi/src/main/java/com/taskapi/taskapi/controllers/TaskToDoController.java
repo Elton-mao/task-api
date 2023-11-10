@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.taskapi.taskapi.core.entity.taskToDo.StatusTaskToDo;
 import com.taskapi.taskapi.core.entity.taskToDo.TaskToDo;
+import com.taskapi.taskapi.core.entity.taskToDo.TaskToDoDTO;
 import com.taskapi.taskapi.core.services.TaskToDoService;
 
 import jakarta.validation.Valid;
@@ -24,8 +25,9 @@ public class TaskToDoController  {
 
     
     @PostMapping
-    public ResponseEntity<String> newTaskTodo(@RequestBody @Valid TaskToDo taskToDo){
-       return taskToDoService.newtaskToDo(taskToDo);
+    public ResponseEntity<String> newTaskTodo(@RequestBody @Valid TaskToDoDTO data){
+      return this.taskToDoService.newtaskToDo(data);
+       
     }
 
     //atualiza uma tarefa
