@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.taskapi.taskapi.core.cases.task.TaskUseCase;
 import com.taskapi.taskapi.core.entity.taskToDo.StatusTaskToDo;
 import com.taskapi.taskapi.core.entity.taskToDo.TaskToDo;
+import com.taskapi.taskapi.core.entity.taskToDo.TaskToDoDTO;
 import com.taskapi.taskapi.infrastructure.repository.TaskRepository;
 @Service
 public class TaskToDoService implements TaskUseCase {
@@ -64,6 +65,18 @@ public class TaskToDoService implements TaskUseCase {
     public ResponseEntity<Object> listStatusTaskToDo(String status) {
         List<TaskToDo> taskToDoList = taskRepository.findByStatusTaskToDo(status);
         return ResponseEntity.ok().body(taskToDoList);
+    }
+
+    @Override
+    public ResponseEntity<String> newtaskToDo(TaskToDoDTO data) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'newtaskToDo'");
+    }
+
+    @Override
+    public ResponseEntity<Object> listStatusTaskToDo(StatusTaskToDo status) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'listStatusTaskToDo'");
     }
     
   
