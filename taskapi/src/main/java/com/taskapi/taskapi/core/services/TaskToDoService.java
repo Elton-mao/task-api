@@ -65,14 +65,13 @@ public class TaskToDoService implements TaskUseCase {
       try {
          Optional<TaskToDo> taskTodOptional = taskRepository.findByTitle(title);
         taskTodOptional.ifPresent(taskToDoUpdate ->{
-      //  TaskToDo taskToDoUpdate = taskTodOptional.get(); 
         taskToDoUpdate.setTitle(taskToDoDetails.getTitle());
         taskToDoUpdate.setDescription(taskToDoDetails.getDescription());
         taskToDoUpdate.setCrationDate(LocalDateTime.now());
         taskRepository.save(taskToDoUpdate);  
         });
       } catch (NoSuchElementException e) {
-          throw new EntityNotFoundException("teste");
+          throw new EntityNotFoundException("erro ao atualizar tarefa verifique os campos e tente novamente");
       }    
         return ResponseEntity.ok().body("tarefa atualizada com Sucesso");
     }
