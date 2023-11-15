@@ -32,7 +32,7 @@ public class TaskToDoService implements TaskUseCase {
     @Override
     public ResponseEntity<String> deleteTaskToDoByid(String id) {
       if (taskRepository.existsById(id)) {
-        taskRepository.deleteById(id);
+       this.taskRepository.deleteById(id);
         }
       else {
         throw new NullPointerException("Nonexistent Record: The provided ID may not exist in the database, possibly due to deletion or an incorrect ID. " + id);
@@ -43,6 +43,9 @@ public class TaskToDoService implements TaskUseCase {
     @Override
     public ResponseEntity<Object> listTaskToDo()  { 
       List<TaskToDo> listTaskToDo = taskRepository.findAll();
+      if (listTaskToDo.isEmpty() == true) {
+         throw new NullPointerException("An unexpected error occurred due to the absence of tasks in the database.");
+      }
       return ResponseEntity.ok().body(listTaskToDo);
     }
 
@@ -51,8 +54,7 @@ public class TaskToDoService implements TaskUseCase {
         Optional<TaskToDo> optionalTalskToDO = taskRepository.findById(id); 
         TaskToDo talskToDo = optionalTalskToDO.get();
         TaskToDoDTO taskToDoDTO = new TaskToDoDTO(talskToDo.getTitle(),talskToDo.getDescription(),talskToDo.getCrationDate(),talskToDo.getStatusTaskToDo());
-        return ResponseEntity.ok().body(taskToDoDTO);
-        
+        return ResponseEntity.ok().body(taskToDoDTO);       
         }
 
     @Override
