@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 
 @ControllerAdvice
@@ -19,5 +20,12 @@ public class AplicationExceptionHandler extends ResponseEntityExceptionHandler{
         DefaultError error = new DefaultError(HttpStatus.NOT_FOUND.value(),e.getMessage());       
         return new ResponseEntity<>(error,HttpStatus.NOT_FOUND);
     }
+    
 
+      @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<DefaultError> handleExeptionEntityNotFoundException(Exception e){
+        log.info(e.getMessage());
+        DefaultError error = new DefaultError(HttpStatus.NOT_FOUND.value(),e.getMessage());       
+        return new ResponseEntity<>(error,HttpStatus.NOT_FOUND);
+    }
 }

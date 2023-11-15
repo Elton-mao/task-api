@@ -3,6 +3,7 @@ package com.taskapi.taskapi.core.services;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import com.taskapi.taskapi.core.entity.taskToDo.StatusTaskToDo;
 import com.taskapi.taskapi.core.entity.taskToDo.TaskToDo;
 import com.taskapi.taskapi.core.entity.taskToDo.TaskToDoDTO;
 import com.taskapi.taskapi.infrastructure.repository.TaskRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 @Service
 public class TaskToDoService implements TaskUseCase {
     @Autowired
@@ -59,13 +62,19 @@ public class TaskToDoService implements TaskUseCase {
 
     @Override
     public ResponseEntity<String> updateTaskToDo(String title, TaskToDo taskToDoDetails) {
-        Optional<TaskToDo> taskTodOptional = taskRepository.findByTitle(title);
-        TaskToDo taskToDoUpdate = taskTodOptional.get(); 
+      try {
+         Optional<TaskToDo> taskTodOptional = taskRepository.findByTitle(title);
+        taskTodOptional.ifPresent(taskToDoUpdate ->{
+      //  TaskToDo taskToDoUpdate = taskTodOptional.get(); 
         taskToDoUpdate.setTitle(taskToDoDetails.getTitle());
         taskToDoUpdate.setDescription(taskToDoDetails.getDescription());
         taskToDoUpdate.setCrationDate(LocalDateTime.now());
-        taskRepository.save(taskToDoUpdate);
-        return ResponseEntity.ok().body("tarefa atualizada com Sucesso"); 
+        taskRepository.save(taskToDoUpdate);  
+        });
+      } catch (NoSuchElementException e) {
+          throw new EntityNotFoundException("teste");
+      }    
+        return ResponseEntity.ok().body("tarefa atualizada com Sucesso");
     }
     
     @Override
