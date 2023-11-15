@@ -13,11 +13,11 @@ import lombok.extern.slf4j.Slf4j;
 public class AplicationExceptionHandler extends ResponseEntityExceptionHandler{
    
     @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity handleExeption(Exception e){
-        log.info("teste");
-        DefaultError error = new DefaultError(HttpStatus.BAD_GATEWAY.value(), "erro ao processar os dados");
+    public ResponseEntity<DefaultError> handleExeption(Exception e){
+        log.info(e.getMessage());
+        DefaultError error = new DefaultError(HttpStatus.NOT_FOUND.value(),e.getMessage());
             
-        return new ResponseEntity<>(error,HttpStatus.BAD_GATEWAY);
+        return new ResponseEntity<>(error,HttpStatus.NOT_FOUND);
     }
 
 }

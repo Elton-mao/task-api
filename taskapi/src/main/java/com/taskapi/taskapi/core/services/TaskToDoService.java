@@ -31,12 +31,17 @@ public class TaskToDoService implements TaskUseCase {
 
     @Override
     public ResponseEntity<String> deleteTaskToDoByid(String id) {
-      taskRepository.deleteById(id);
+      if (taskRepository.existsById(id)) {
+        taskRepository.deleteById(id);
+        }
+      else {
+        throw new NullPointerException("Nonexistent Record: The provided ID may not exist in the database, possibly due to deletion or an incorrect ID. " + id);
+      }
       return ResponseEntity.ok().body("tarefa deletada com sucesso");
     }
 
     @Override
-    public ResponseEntity<Object> listTaskToDo()  {
+    public ResponseEntity<Object> listTaskToDo()  { 
       List<TaskToDo> listTaskToDo = taskRepository.findAll();
       return ResponseEntity.ok().body(listTaskToDo);
     }
