@@ -71,7 +71,7 @@ public class TaskToDoService implements TaskUseCase {
         taskRepository.save(taskToDoUpdate);  
         });
       } catch (NoSuchElementException e) {
-          throw new EntityNotFoundException("erro ao atualizar tarefa verifique os campos e tente novamente");
+          throw new EntityNotFoundException("error updating task, check the fields and try again");
       }    
         return ResponseEntity.ok().body("tarefa atualizada com Sucesso");
     }
