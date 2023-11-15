@@ -5,20 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.taskapi.taskapi.core.cases.task.TaskUseCase;
 import com.taskapi.taskapi.core.entity.taskToDo.StatusTaskToDo;
 import com.taskapi.taskapi.core.entity.taskToDo.TaskToDo;
 import com.taskapi.taskapi.core.entity.taskToDo.TaskToDoDTO;
 import com.taskapi.taskapi.infrastructure.repository.TaskRepository;
-
 import jakarta.persistence.EntityNotFoundException;
 @Service
 public class TaskToDoService implements TaskUseCase {
+    
     @Autowired
     private TaskRepository taskRepository; 
 
@@ -94,6 +92,6 @@ public class TaskToDoService implements TaskUseCase {
         return ResponseEntity.ok().body(taskToDoDTOs);
     }
 
-    
+   
   
 }
