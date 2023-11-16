@@ -50,10 +50,9 @@ public class TaskToDoService implements TaskUseCase {
       }
       return ResponseEntity.ok().body(listTaskToDo);
     }
-    
+
     @Override
     public ResponseEntity<Object> findTaskById(String id) {
-      
         Optional<TaskToDo> optionalTalskToDO = taskRepository.findById(id); 
         if (optionalTalskToDO.isEmpty()) {
          throw new NullPointerException("id not found in database");
@@ -92,12 +91,17 @@ public class TaskToDoService implements TaskUseCase {
     @Override
     public ResponseEntity<Object> listStatusTaskToDo(StatusTaskToDo status) {
         List<TaskToDo> taskToDoList = taskRepository.findByStatusTaskToDo(status);
+        //verifica se a lista está vazia       
+        if (taskToDoList.isEmpty()) {
+            throw new NullPointerException("There are no tasks with the selected status ->"+status);
+        }
         List<TaskToDoDTO> taskToDoDTOs = new ArrayList<>(); 
         for(TaskToDo task : taskToDoList ){
             TaskToDoDTO taskToDoDTO = new TaskToDoDTO(task.getTitle(),task.getDescription(),
              task.getCrationDate(), task.getStatusTaskToDo()); 
             taskToDoDTOs.add(taskToDoDTO);
         }
+        
         return ResponseEntity.ok().body(taskToDoDTOs);
     }
 }
