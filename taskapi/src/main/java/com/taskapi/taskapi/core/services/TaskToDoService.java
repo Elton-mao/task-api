@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -49,13 +50,21 @@ public class TaskToDoService implements TaskUseCase {
       }
       return ResponseEntity.ok().body(listTaskToDo);
     }
-
+  ///bronca pra resolver depoisssssssssssss=========================
     @Override
     public ResponseEntity<Object> findTaskById(String id) {
+      
         Optional<TaskToDo> optionalTalskToDO = taskRepository.findById(id); 
-        TaskToDo talskToDo = optionalTalskToDO.get();
-        TaskToDoDTO taskToDoDTO = new TaskToDoDTO(talskToDo.getTitle(),talskToDo.getDescription(),talskToDo.getCrationDate(),talskToDo.getStatusTaskToDo());
-        return ResponseEntity.ok().body(taskToDoDTO);       
+        if (optionalTalskToDO.isEmpty()) {
+         throw new NullPointerException("id não encontrado na base de dados");
+        }
+        TaskToDo taskToDo = optionalTalskToDO.get();
+        TaskToDoDTO taskToDoDTO = new TaskToDoDTO(
+        taskToDo.getTitle(),
+        taskToDo.getDescription(),
+        taskToDo.getCrationDate(),
+        taskToDo.getStatusTaskToDo());
+        return ResponseEntity.ok().body(taskToDoDTO);                          
         }
 
     @Override
@@ -91,7 +100,4 @@ public class TaskToDoService implements TaskUseCase {
         }
         return ResponseEntity.ok().body(taskToDoDTOs);
     }
-
-   
-  
 }
