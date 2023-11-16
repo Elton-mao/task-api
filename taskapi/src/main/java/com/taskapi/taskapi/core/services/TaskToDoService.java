@@ -50,13 +50,13 @@ public class TaskToDoService implements TaskUseCase {
       }
       return ResponseEntity.ok().body(listTaskToDo);
     }
-  ///bronca pra resolver depoisssssssssssss=========================
+    
     @Override
     public ResponseEntity<Object> findTaskById(String id) {
       
         Optional<TaskToDo> optionalTalskToDO = taskRepository.findById(id); 
         if (optionalTalskToDO.isEmpty()) {
-         throw new NullPointerException("id não encontrado na base de dados");
+         throw new NullPointerException("id not found in database");
         }
         TaskToDo taskToDo = optionalTalskToDO.get();
         TaskToDoDTO taskToDoDTO = new TaskToDoDTO(
